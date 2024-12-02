@@ -1,7 +1,7 @@
 qpois(0.025, lambda = 60)/400
 qpois(0.975, lambda = 60)/400
 
-!install.packages("EnvStats")
+#!install.packages("EnvStats")
 library("EnvStats")
 
 make_pois_samples <- function(samples, n, lambda){
@@ -23,7 +23,7 @@ make_exp_samples <- function(samples, n, rate){
   for(x in 0:samples){
     sample = rpois(n, rate)
     result[length(result)+1] = sum(sample)
-    vals[length(vals)+1] = (mean(sample) - 0.5)/(sd(sample)/sqrt(n))
+    vals[length(vals)+1] = (mean(sample) - (1/rate))/(sd(sample)/sqrt(n))
   }
   
   return(list(result, vals))
@@ -68,41 +68,65 @@ list_unif_10E4= make_unif_samples(10000, 1000, 0, 1)
 list_unif_10E5 = make_unif_samples(100000, 1000, 0, 1)
 
 
-#--------------------------------------------------------------
+#TASK 1 --------------------------------------------------------------
 
-hist(list_pois_10E3[[1]],20)
-hist(list_pois_10E4[[1]],20)
-hist(list_pois_10E5[[1]],20)
-
+hist(list_pois_10E3[[1]],20, main="Pois. 10³ samples", xlab="Sum")
+hist(list_pois_10E3[[2]],20, main="Pois. 10³ samples", xlab="Z-test")
 qqnorm(list_pois_10E3[[1]])
+qqnorm(list_pois_10E3[[2]])
+
+hist(list_pois_10E4[[1]],20, main="Pois. 10⁴ samples", xlab="Sum")
+hist(list_pois_10E4[[2]],20, main="Pois. 10⁴ samples", xlab="Z-test")
 qqnorm(list_pois_10E4[[1]])
+qqnorm(list_pois_10E4[[2]])
+
+hist(list_pois_10E5[[1]],20, main="Pois. 10⁵ samples", xlab="Sum")
+hist(list_pois_10E5[[2]],20, main="Pois. 10⁵ samples", xlab="Z-test")
 qqnorm(list_pois_10E5[[1]])
+qqnorm(list_pois_10E5[[2]])
 
 
-hist(list_exp_10E3[[1]],20)
-hist(list_exp_10E4[[1]],20)
-hist(list_exp_10E5[[1]],20)
 
+hist(list_exp_10E3[[1]],20, main="exp. 10³ samples", xlab="Sum")
+hist(list_exp_10E3[[2]],20, main="exp. 10³ samples", xlab="Z-test")
 qqnorm(list_exp_10E3[[1]])
+qqnorm(list_exp_10E3[[2]])
+
+hist(list_exp_10E4[[1]],20, main="exp. 10⁴ samples", xlab="Sum")
+hist(list_exp_10E4[[2]],20, main="exp. 10⁴ samples", xlab="Z-test")
 qqnorm(list_exp_10E4[[1]])
+qqnorm(list_exp_10E4[[2]])
+
+hist(list_exp_10E5[[1]],20, main="exp. 10⁵ samples", xlab="Sum")
+hist(list_exp_10E5[[2]],20, main="exp. 10⁵ samples", xlab="Z-test")
 qqnorm(list_exp_10E5[[1]])
+qqnorm(list_exp_10E5[[2]])
 
 
-hist(list_unif_10E3[[1]],20)
-hist(list_unif_10E4[[1]],20)
-hist(list_unif_10E5[[1]],20)
-
+hist(list_unif_10E3[[1]],20, main="unif. 10³ samples", xlab="Sum")
+hist(list_unif_10E3[[2]],20, main="unif. 10³ samples", xlab="Z-test")
 qqnorm(list_unif_10E3[[1]])
+qqnorm(list_unif_10E3[[2]])
+
+hist(list_unif_10E4[[1]],20, main="unif. 10⁴ samples", xlab="Sum")
+hist(list_unif_10E4[[2]],20, main="unif. 10⁴ samples", xlab="Z-test")
 qqnorm(list_unif_10E4[[1]])
+qqnorm(list_unif_10E4[[2]])
+
+hist(list_unif_10E5[[1]],20, main="unif. 10⁵ samples", xlab="Sum")
+hist(list_unif_10E5[[2]],20, main="unif. 10⁵ samples", xlab="Z-test")
 qqnorm(list_unif_10E5[[1]])
+qqnorm(list_unif_10E5[[2]])
 
 
-#--------------------------------------------------------------
 
-list_unif_10E3 = make_pareto_samples(1000, 100, 1.5, 1)
-hist(list_unif_10E3[[1]],20)
-qqnorm(list_unif_10E3[[1]])
 
-hist(list_unif_10E3[[2]],20)
+# TASK 2 --------------------------------------------------------------
+
+list_pareto_10E3 = make_pareto_samples(1000, 100, 1.5, 1)
+hist(list_pareto_10E3[[1]], main="pareto 10³ samples", xlab="Sum")
+hist(list_pareto_10E3[[2]], main="pareto 10³ samples", xlab="Z-test")
+qqnorm(list_pareto_10E3[[1]])
+qqnorm(list_pareto_10E3[[2]])
 
 
